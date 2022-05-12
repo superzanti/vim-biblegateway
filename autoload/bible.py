@@ -55,6 +55,7 @@ def get_soup(query, version):
 
 
 def clean(tag):
+    global show_verse_numbers
     for t in tag.find_all("sup"):
         if show_verse_numbers and "versenum" in t["class"]:
             continue
@@ -93,8 +94,9 @@ def get_passage(soup):
         return
     return "\n\n".join(map(lambda t: render(t), root.select("p, div.poetry p")))
 
-def manual_load(query, version, show_verse_numbers, use_ascii):
-    if show_verse_numbers == 1:
+def manual_load(query, version, _show_verse_numbers, use_ascii):
+    global show_verse_numbers
+    if _show_verse_numbers == '1':
         show_verse_numbers = True
     else:
         show_verse_numbers = False
